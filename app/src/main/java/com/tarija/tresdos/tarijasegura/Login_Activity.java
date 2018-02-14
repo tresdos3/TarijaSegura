@@ -70,6 +70,7 @@ public class Login_Activity extends AppCompatActivity {
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
+                        .setTheme(R.style.AppTheme_NoActionBar)
                         .setAvailableProviders(
                                 Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()))
                         .build(),
@@ -82,6 +83,6 @@ public class Login_Activity extends AppCompatActivity {
         startActivity(intent);
     }
     public void messages(int type, String message){
-        MDToast.makeText(mRootView.getContext(), message, MDToast.LENGTH_LONG, type).show();
+        MDToast.makeText(getApplicationContext(), message, MDToast.LENGTH_SHORT, type).show();
     }
 }
