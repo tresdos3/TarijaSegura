@@ -44,7 +44,7 @@ public class OptionActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Tipo, "p");
                 editor.commit();
-                Intent i = new Intent(OptionActivity.this, MainActivity.class);
+                Intent i = new Intent(OptionActivity.this, ProfileConfActivity.class);
                 finish();
                 startActivity(i);
             }
