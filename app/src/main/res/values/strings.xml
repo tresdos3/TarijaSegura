@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TarijaSegura</string>
+
+    <string name="nameerror">Ingresa un nombre valido</string>
+    <string name="lastnameerror">Ingresa un apellido valido</string>
+    <string name="emailerror">Ingresa un email valido</string>
+    <string name="cierror">Ingresa tu CI correctmente</string>
+    <string name="typeerror">Selecciona un tipo</string>
 </resources>
