@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 public class ProfileConfActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,12 +33,11 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
         family = (MaterialSpinner) findViewById(R.id.select_padre);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
-
+        family.setItems("Selecciona una opcion...","Abuelo (a)", "Hermano (a)", "Padre", "Madre", "Tio (a)");
         awesomeValidation.addValidation(this, R.id.name_padre,"^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
         awesomeValidation.addValidation(this, R.id.lastname_padre,"^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.lastnameerror);
         awesomeValidation.addValidation(this, R.id.email_padre, Patterns.EMAIL_ADDRESS, R.string.emailerror);
-        awesomeValidation.addValidation(this, R.id.ci_padre, "^[2-9]{2}[0-9]{8}$", R.string.cierror);
-
+        awesomeValidation.addValidation(this, R.id.ci_padre, "^(0|[1-9][0-9]*)$", R.string.cierror);
         btnRegister.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
     }
@@ -53,6 +53,16 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
         }
     }
     public void ValidateForm(){
-        Toast.makeText(this, "Work!", Toast.LENGTH_SHORT).show();
+        if (awesomeValidation.validate()) {
+            if (!family.getText().equals("Selecciona una opcion...")) {
+                Toast.makeText(this, "Work!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                messages(MDToast.TYPE_ERROR,"Seleccione un opcion...");
+            }
+        }
+    }
+    public void messages(int type, String message){
+        MDToast.makeText(getApplicationContext(), message, MDToast.LENGTH_SHORT, type).show();
     }
 }

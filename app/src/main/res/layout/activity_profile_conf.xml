@@ -120,6 +120,8 @@
         android:id="@+id/ci_padre"
         android:layout_width="match_parent"
         android:layout_height="43dp"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:inputType="number"
         android:hint="Ci..." />
 </android.support.design.widget.TextInputLayout>
