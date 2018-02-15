@@ -1,5 +1,6 @@
 package com.tarija.tresdos.tarijasegura;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,10 @@ public class OptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option);
+
+        sharedPreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
+
         btnPadre = (Button) findViewById(R.id.btnpadre);
         btnHijo = (Button) findViewById(R.id.btnhijo);
 
