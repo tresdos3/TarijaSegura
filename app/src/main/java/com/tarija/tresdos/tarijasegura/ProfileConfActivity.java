@@ -142,12 +142,13 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                             public void onSuccess(Void aVoid) {
                                 pDialog.dismissWithAnimation();
                                 new SweetAlertDialog(ProfileConfActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText("Usuario registrado :)!")
+                                        .setTitleText("Felicidades ya puede :)!")
                                         .setContentText("Continuar...!")
                                         .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismissWithAnimation();
+
                                             }
                                         })
                                         .show();
@@ -164,6 +165,7 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismissWithAnimation();
+                                                goMainActivity();
                                             }
                                         })
                                         .show();
@@ -175,6 +177,14 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
             }
         }
     }
+
+    private void goMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        finish();
+        startActivity(intent);
+    }
+
     public void messages(int type, String message){
         MDToast.makeText(getApplicationContext(), message, MDToast.LENGTH_SHORT, type).show();
     }
@@ -184,6 +194,7 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
         finish();
         startActivity(intent);
     }
+
 
     @Override
     public void onBackPressed() {

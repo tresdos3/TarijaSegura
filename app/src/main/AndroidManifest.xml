@@ -24,9 +24,10 @@
         <activity
             android:name=".OptionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileConfActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".ProfileConfActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Intro_Activity"></activity>
     </application>
 
 </manifest>
