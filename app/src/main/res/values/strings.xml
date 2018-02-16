@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TarijaSegura</string>
+    <string name="app_name">Tarija Segura</string>
 
     <string name="nameerror">Ingresa un nombre valido</string>
     <string name="lastnameerror">Ingresa un apellido valido</string>

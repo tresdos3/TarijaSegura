@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/db" android:title="Dashboard" android:icon="@drawable/ic_dashboard_black_24dp"/>
-    <item android:id="@+id/mycourse" android:title="Agregar nuevo" android:icon="@drawable/ic_person_add_black_24dp"/>
-    <item android:id="@+id/matter" android:title="Ubicar" android:icon="@drawable/ic_location_on_black_24dp"/>
-    <item android:id="@+id/agend" android:title="Filtro Porno" android:icon="@drawable/ic_warning_black_24dp"/>
-    <item android:id="@+id/student" android:title="Contactos" android:icon="@drawable/ic_perm_contact_calendar_black_24dp"/>
-    <item android:id="@+id/event" android:title="Seguridad Ciudadana" android:icon="@drawable/ic_location_city_black_24dp"/>
+    <item android:id="@+id/addNew" android:title="Agregar nuevo" android:icon="@drawable/ic_person_add_black_24dp"/>
+    <item android:id="@+id/location" android:title="Ubicar" android:icon="@drawable/ic_location_on_black_24dp"/>
+    <item android:id="@+id/porn" android:title="Filtro Porno" android:icon="@drawable/ic_warning_black_24dp"/>
+    <item android:id="@+id/contacts" android:title="Contactos" android:icon="@drawable/ic_perm_contact_calendar_black_24dp"/>
+    <item android:id="@+id/city" android:title="Seguridad Ciudadana" android:icon="@drawable/ic_location_city_black_24dp"/>
 </menu>
