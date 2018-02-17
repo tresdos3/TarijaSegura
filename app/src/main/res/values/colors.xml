@@ -6,4 +6,5 @@
     <color name="lightorange">#fdf2df</color>
     <color name="lightorangedark">#ebd6ab</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="colorButton">#0277bd</color>
 </resources>
