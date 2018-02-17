@@ -11,18 +11,19 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_width="258dp"
+        android:layout_height="127dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/titleSelec"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.706"
+        app:layout_constraintVertical_bias="0.53999996"
         app:srcCompat="@drawable/photo" />
 
     <TextView
@@ -31,16 +32,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:text="Selecciona un hijo que este registrado:"
         android:textColor="@color/colorWhite"
         android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ListaHijos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/ListaHijos"
@@ -48,11 +53,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleSelec"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSeleccionar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.AppCompatButton
@@ -61,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ListaHijos"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="#ffffff"
@@ -70,5 +76,6 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
