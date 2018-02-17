@@ -12,7 +12,10 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Login_Activity"
@@ -23,14 +26,11 @@
         <activity
             android:name=".ProfileConfActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Intro_Activity" />
+        <activity android:name=".Intro_Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SelectChildActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

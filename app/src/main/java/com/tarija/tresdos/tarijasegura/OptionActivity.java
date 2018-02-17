@@ -62,7 +62,7 @@ public class OptionActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Tipo, "h");
                 editor.commit();
-                Intent i = new Intent(OptionActivity.this, MainActivity.class);
+                Intent i = new Intent(OptionActivity.this, Intro_Activity.class);
                 finish();
                 startActivity(i);
             }

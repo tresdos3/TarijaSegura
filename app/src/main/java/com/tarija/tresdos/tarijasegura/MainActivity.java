@@ -1,5 +1,6 @@
 package com.tarija.tresdos.tarijasegura;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "h":
                     setContentView(R.layout.activity_main_child);
-                    chagueVariables();
+                    getSupportActionBar().hide();
                     break;
             }
         }
