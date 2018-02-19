@@ -62,16 +62,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading);
 
-        l1 = (LinearLayout) findViewById(R.id.ll);
-        c1 = (ConstraintLayout) findViewById(R.id.cl);
-
-        father_name = (TextView) findViewById(R.id.father_name);
-        father_ci = (TextView) findViewById(R.id.father_ci);
-        father_mail = (TextView) findViewById(R.id.father_mail);
-        father_phone = (TextView) findViewById(R.id.father_phone);
-        father_family = (TextView) findViewById(R.id.father_family);
-        child_name = (TextView) findViewById(R.id.child_name);
-
         sharedPreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
@@ -90,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
                 case "h":
                     setContentView(R.layout.activity_main_child);
                     getSupportActionBar().hide();
+                    l1 = (LinearLayout) findViewById(R.id.ll);
+                    c1 = (ConstraintLayout) findViewById(R.id.cl);
+                    father_name = (TextView) findViewById(R.id.father_name);
+                    father_ci = (TextView) findViewById(R.id.father_ci);
+                    father_mail = (TextView) findViewById(R.id.father_mail);
+                    father_phone = (TextView) findViewById(R.id.father_phone);
+                    father_family = (TextView) findViewById(R.id.father_family);
+                    child_name = (TextView) findViewById(R.id.child_name);
+                    ChargeProfile();
                     break;
             }
         }
@@ -216,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
         l1.setVisibility(View.GONE);
     }
     private void ChargeProfile() {
-        HideProfile();
+//        HideProfile();
         profileRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -235,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, String> map = (Map)dataSnapshot.getValue();
                                     child_name.setText(map.get("nombre"));
+                                    ViewProfile();
                                 }
 
                                 @Override
