@@ -7,4 +7,8 @@
     <color name="lightorangedark">#ebd6ab</color>
     <color name="colorAccent">#ffffff</color>
     <color name="colorButton">#0277bd</color>
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
+    <color name="startblue">#09c6df</color>
+    <color name="endtblue">#0bcce6</color>
 </resources>
