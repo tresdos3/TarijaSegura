@@ -7,8 +7,8 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.tarija.tresdos.safetarija.DashboardPActivity;
-import com.tarija.tresdos.safetarija.R;
+import com.tarija.tresdos.tarijasegura.R;
+import com.tarija.tresdos.tarijasegura.MainActivity;
 
 public class MyFirebaseService extends FirebaseMessagingService {
     @Override
@@ -17,11 +17,11 @@ public class MyFirebaseService extends FirebaseMessagingService {
         VerNotificacion(remoteMessage.getNotification());
     }
     private void VerNotificacion(RemoteMessage.Notification notification) {
-        Intent intent = new Intent(this, DashboardPActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.login)
+                .setSmallIcon(R.drawable.sos)
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getBody())
                 .setAutoCancel(true)

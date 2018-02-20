@@ -46,6 +46,8 @@ import com.valdesekamdem.library.mdtoast.MDToast;
 import java.util.ArrayList;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout l1;
@@ -116,19 +118,27 @@ public class MainActivity extends AppCompatActivity {
                     father_family = (TextView) findViewById(R.id.father_family);
                     child_name = (TextView) findViewById(R.id.child_name);
 
-
-
-//                    permissionManager = new PermissionManager() {};
-//                    permissionManager.checkAndRequestPermissions(this);
-//                    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-//                    }
-//                    if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                            && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
-//                                android.Manifest.permission.ACCESS_FINE_LOCATION},10);
-//                    }
-
+                    new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+                            .setTitleText("Atencion!")
+                            .setContentText("Por favor acepta los siguientes permisos :).")
+                            .setCustomImage(R.drawable.smartphone)
+                            .setConfirmText("Ok")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    permissionManager = new PermissionManager() {};
+                                    permissionManager.checkAndRequestPermissions(MainActivity.this);
+                                    if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+                                    }
+                                    if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                            && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                android.Manifest.permission.ACCESS_FINE_LOCATION},10);
+                                    }
+                                }
+                            })
+                            .show();
 
                     ChargeProfile();
                     RegisterTokenChild();

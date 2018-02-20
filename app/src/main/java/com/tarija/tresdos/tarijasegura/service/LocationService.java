@@ -20,7 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tarija.tresdos.tarijasegura.helper.ILocationConstants;
 import com.tarija.tresdos.tarijasegura.storage.AppPreferences;
+import com.tarija.tresdos.tarijasegura.storage.IPreferenceConstants;
 
 import java.text.DateFormat;
 import java.util.Date;
