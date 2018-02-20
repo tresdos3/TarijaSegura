@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,8 +32,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.tarija.tresdos.tarijasegura.fragments.DashboardFragment;
 import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
+import com.tarija.tresdos.tarijasegura.other.PolicyManager;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.Map;
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout l1;
     private ConstraintLayout c1;
 
+    private Button sendMail;
+
     private TextView father_ci, father_mail, father_phone, father_name, father_family, child_name;
 
     private FirebaseUser user;
@@ -49,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
+    private PolicyManager policyManager;
+    String device_unique_id,IMEI;
 
     private SharedPreferences sharedPreferences;
     private FragmentManager fragmentManager = getSupportFragmentManager();
@@ -76,12 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 case "p":
                     setContentView(R.layout.activity_main);
                     chagueVariables();
+                    RegisterToken();
                     break;
                 case "h":
                     setContentView(R.layout.activity_main_child);
                     getSupportActionBar().hide();
                     l1 = (LinearLayout) findViewById(R.id.ll);
                     c1 = (ConstraintLayout) findViewById(R.id.cl);
+                    sendMail = (Button) findViewById(R.id.sendMail);
                     father_name = (TextView) findViewById(R.id.father_name);
                     father_ci = (TextView) findViewById(R.id.father_ci);
                     father_mail = (TextView) findViewById(R.id.father_mail);
@@ -89,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     father_family = (TextView) findViewById(R.id.father_family);
                     child_name = (TextView) findViewById(R.id.child_name);
                     ChargeProfile();
+                    RegisterTokenChild();
                     break;
             }
         }
@@ -205,14 +216,17 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    private void RegisterToken(){}
+    private void RegisterToken(){
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        profileRef.child("tokenP").setValue(refreshedToken);
+    }
+    private void RegisterTokenChild(){
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        profileRef.child("tokenH").setValue(refreshedToken);
+    }
     private void ViewProfile() {
         c1.setVisibility(View.GONE);
         l1.setVisibility(View.VISIBLE);
-    }
-    private void HideProfile() {
-        c1.setVisibility(View.VISIBLE);
-        l1.setVisibility(View.GONE);
     }
     private void ChargeProfile() {
 //        HideProfile();

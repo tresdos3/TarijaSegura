@@ -214,6 +214,7 @@
             </LinearLayout>
         </LinearLayout>
         <Button
+            android:id="@+id/sendMail"
             android:textColor="#fff"
             android:background="@drawable/btnstyle"
             android:layout_marginTop="15dp"
