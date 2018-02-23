@@ -26,8 +26,8 @@ public class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
 	@Override
 	public CharSequence onDisableRequested(Context context, Intent intent) {
 		// TODO Auto-generated method stub
-		MDToast mdToast = MDToast.makeText(context, "DPM ha sido desactivado", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO);
-		mdToast.show();
+//		MDToast mdToast = MDToast.makeText(context, "DPM ha sido desactivado", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO);
+//		mdToast.show();
 		return super.onDisableRequested(context, intent);
 	}
 
