@@ -1,6 +1,10 @@
 package com.tarija.tresdos.tarijasegura;
 
+import android.*;
+import android.Manifest;
 import android.app.ActionBar;
+import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +54,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<String> granted;
+    ArrayList<String> deneid;
+
     private LinearLayout l1;
     private ConstraintLayout c1;
 
@@ -68,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
     public  static final int RequestPermissionCode  = 1 ;
     public static  final String NombreHIJO = "Nombrehijo";
-    public static final String BtnVisible = "btnKey";
+    public static final String message = "btnKey";
+    public static final String message2 = "btnAdmin";
     private PermissionManager permissionManager;
     private final int REQUEST_LOCATION = 200;
     private LocationManager lm;
@@ -85,15 +93,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading);
 
+        policyManager = new PolicyManager(this);
         sharedPreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        profileRef = rootRef.child(user.getUid());
-        childRef = rootRef.child(user.getUid()).child("/hijos");
-
         if (user != null){
+            profileRef = rootRef.child(user.getUid());
+            childRef = rootRef.child(user.getUid()).child("/hijos");
             String type = sharedPreferences.getString(Tipo, "");
             switch (type){
                 case "p":
@@ -118,36 +126,42 @@ public class MainActivity extends AppCompatActivity {
                     father_family = (TextView) findViewById(R.id.father_family);
                     child_name = (TextView) findViewById(R.id.child_name);
 
-                    new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                            .setTitleText("Atencion!")
-                            .setContentText("Por favor acepta los siguientes permisos :).")
-                            .setCustomImage(R.drawable.smartphone)
-                            .setConfirmText("Ok")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    permissionManager = new PermissionManager() {};
-                                    permissionManager.checkAndRequestPermissions(MainActivity.this);
-                                    if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-                                    }
-                                    if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                                            && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                                                android.Manifest.permission.ACCESS_FINE_LOCATION},10);
-                                    }
-                                }
-                            })
-                            .show();
-
                     ChargeProfile();
                     RegisterTokenChild();
+
                     break;
             }
         }
         else {
             goLogInScreen();
         }
+    }
+    private void alertPermission() {
+        new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+                .setTitleText("Atencion!")
+                .setContentText("Por favor acepta los siguientes permisos :).")
+                .setCustomImage(R.drawable.smartphone)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        permissionManager = new PermissionManager() {};
+                        permissionManager.checkAndRequestPermissions(MainActivity.this);
+                        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+
+                        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.ACCESS_FINE_LOCATION},10);
+
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(message, "true");
+                        editor.commit();
+                    }
+                })
+                .show();
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -173,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.content,new DashboardFragment())
                 .commit();
     }
-
     private void SetupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -183,15 +196,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permissionManager.checkResult(requestCode, permissions, grantResults);
 
-        ArrayList<String> granted = permissionManager.getStatus().get(0).granted;
-        ArrayList<String> denied = permissionManager.getStatus().get(0).denied;
+        granted = permissionManager.getStatus().get(0).granted;
+        deneid = permissionManager.getStatus().get(0).denied;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.logout){
@@ -232,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle(menuItem.getTitle());
         mDrawerLayout.closeDrawers();
     }
-
     private void goLogInScreen() {
         Intent intent = new Intent(this, Login_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -300,6 +310,24 @@ public class MainActivity extends AppCompatActivity {
                                     Map<String, String> map = (Map)dataSnapshot.getValue();
                                     child_name.setText(map.get("nombre"));
                                     ViewProfile();
+
+                                    if (!sharedPreferences.contains(message))
+                                        alertPermission();
+                                    else {
+                                        String texto = sharedPreferences.getString(message,"");
+                                        if (!texto.equals("true")){
+                                            alertPermission();
+                                        }
+                                    }
+                                    if (!sharedPreferences.contains(message2))
+                                        AdminDevice();
+                                    else {
+                                        String texto = sharedPreferences.getString(message,"");
+                                        if (!texto.equals("true")){
+                                            AdminDevice();
+                                        }
+                                    }
+
                                 }
 
                                 @Override
@@ -322,5 +350,45 @@ public class MainActivity extends AppCompatActivity {
                 messages(MDToast.TYPE_ERROR,"Esto es vergonzoso :)");
             }
         });
+    }
+    private  void AdminDevice(){
+
+        new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+                .setTitleText("Atencion!")
+                .setContentText("Por favor acepta los siguientes permisos :).")
+                .setCustomImage(R.drawable.smartphone)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        if (!policyManager.isAdminActive()) {
+                            Intent activateDeviceAdmin = new Intent(
+                                    DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                            activateDeviceAdmin.putExtra(
+                                    DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+                                    policyManager.getAdminComponent());
+                            activateDeviceAdmin
+                                    .putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                                            "Al activar esta funcion la aplicacion Tarija Segura no podra ser quitada de este telefono cellular :)");
+                            startActivityForResult(activateDeviceAdmin,
+                                    PolicyManager.DPM_ACTIVATION_REQUEST_CODE);
+                        }
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(message2, "true");
+                        editor.commit();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK
+                && requestCode == PolicyManager.DPM_ACTIVATION_REQUEST_CODE) {
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

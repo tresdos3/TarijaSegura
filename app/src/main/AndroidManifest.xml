@@ -53,6 +53,55 @@
             android:name=".SelectChildActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <receiver
+            android:name=".receiver.NetworkReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.DeviceAdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED" />
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".service.MyFirebaseService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".service.LocationService"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name=".service.EmergencyService"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name=".service.ContactsService"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name=".service.BrowserService"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name=".service.DetectAppService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>
