@@ -45,6 +45,11 @@ import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.tarijasegura.fragments.DashboardFragment;
 import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
 import com.tarija.tresdos.tarijasegura.other.PolicyManager;
+import com.tarija.tresdos.tarijasegura.service.BrowserService;
+import com.tarija.tresdos.tarijasegura.service.ContactsService;
+import com.tarija.tresdos.tarijasegura.service.DetectAppService;
+import com.tarija.tresdos.tarijasegura.service.EmergencyService;
+import com.tarija.tresdos.tarijasegura.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public static  final String NombreHIJO = "Nombrehijo";
     public static final String message = "btnKey";
     public static final String message2 = "btnAdmin";
+    public static final String message3 = "btnServices";
     private PermissionManager permissionManager;
     private final int REQUEST_LOCATION = 200;
     private LocationManager lm;
@@ -322,9 +328,17 @@ public class MainActivity extends AppCompatActivity {
                                     if (!sharedPreferences.contains(message2))
                                         AdminDevice();
                                     else {
-                                        String texto = sharedPreferences.getString(message,"");
+                                        String texto = sharedPreferences.getString(message2,"");
                                         if (!texto.equals("true")){
                                             AdminDevice();
+                                        }
+                                    }
+                                    if (!sharedPreferences.contains(message3))
+                                        iniciarServicio();
+                                    else {
+                                        String texto = sharedPreferences.getString(message2,"");
+                                        if (!texto.equals("true")){
+                                            iniciarServicio();
                                         }
                                     }
 
@@ -352,7 +366,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private  void AdminDevice(){
-
         new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setTitleText("Atencion!")
                 .setContentText("Por favor acepta los siguientes permisos :).")
@@ -390,5 +403,49 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void iniciarServicio(){
+        new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+                .setTitleText("Atencion!")
+                .setContentText("Por favor acepta los siguientes permisos :).")
+                .setCustomImage(R.drawable.smartphone)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
+                        startService(intentGeo);
+                        Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
+                        startService(intentBrowser);
+                        Intent intentEmer = new Intent(MainActivity.this, EmergencyService.class);
+                        startService(intentEmer);
+                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
+                        startService(intentApps);
+                        Intent intentInternet = new Intent(MainActivity.this, ContactsService.class);
+                        startService(intentInternet);
+
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(message3, "true");
+                        editor.commit();
+                    }
+                })
+                .show();
+    }
+    private void cerrarServicio(){
+        Intent intentGeo = new Intent(this, LocationService.class);
+        this.stopService(intentGeo);
+        Intent intentEmer = new Intent(this, EmergencyService.class);
+        this.stopService(intentEmer);
+        Intent intentInternet = new Intent(this, ContactsService.class);
+        this.stopService(intentInternet);
+        Intent intentApps = new Intent(this, DetectAppService.class);
+        this.stopService(intentApps);
+        Intent intentBrowser = new Intent(this, BrowserService.class);
+        this.stopService(intentBrowser);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(message, "false");
+        editor.commit();
     }
 }
