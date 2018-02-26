@@ -325,20 +325,14 @@ public class MainActivity extends AppCompatActivity {
                                             alertPermission();
                                         }
                                     }
-                                    if (!sharedPreferences.contains(message2))
-                                        AdminDevice();
-                                    else {
-                                        String texto = sharedPreferences.getString(message2,"");
-                                        if (!texto.equals("true")){
-                                            AdminDevice();
-                                        }
-                                    }
                                     if (!sharedPreferences.contains(message3))
-                                        iniciarServicio();
+                                        if(iniciarServicio())
+                                            AdminDevice();
                                     else {
                                         String texto = sharedPreferences.getString(message2,"");
                                         if (!texto.equals("true")){
-                                            iniciarServicio();
+                                            if(iniciarServicio())
+                                                AdminDevice();
                                         }
                                     }
 
@@ -368,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
     private  void AdminDevice(){
         new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setTitleText("Atencion!")
-                .setContentText("Por favor acepta los siguientes permisos :).")
+                .setContentText("Activa el metodo de seguriada para evitar que la aplicacion sea quitada del telefono")
                 .setCustomImage(R.drawable.smartphone)
                 .setConfirmText("Ok")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -405,10 +399,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void iniciarServicio(){
+    private boolean iniciarServicio(){
         new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setTitleText("Atencion!")
-                .setContentText("Por favor acepta los siguientes permisos :).")
+                .setContentText("Activar todos los servicios de Tarija Segura :)")
                 .setCustomImage(R.drawable.smartphone)
                 .setConfirmText("Ok")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -432,6 +426,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+        return true;
     }
     private void cerrarServicio(){
         Intent intentGeo = new Intent(this, LocationService.class);

@@ -148,7 +148,7 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismissWithAnimation();
-
+                                                goMainActivity();
                                             }
                                         })
                                         .show();
@@ -165,7 +165,6 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismissWithAnimation();
-                                                goMainActivity();
                                             }
                                         })
                                         .show();
