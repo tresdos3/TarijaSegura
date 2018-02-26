@@ -25,6 +25,13 @@ public class ChildClass {
         this.setEstado(estado);
         this.setAlerta(alerta);
     }
+    public  ChildClass(String key, String nombre, String token, String estado, String alerta){
+        this.setKey(key);
+        this.setNombre(nombre);
+        this.setToken(token);
+        this.setEstado(estado);
+        this.setAlerta(alerta);
+    }
 
     public String getNombre() {
         return nombre;

@@ -42,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.karan.churi.PermissionManager.PermissionManager;
+import com.tarija.tresdos.tarijasegura.fragments.ChildListFragment;
 import com.tarija.tresdos.tarijasegura.fragments.DashboardFragment;
 import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
 import com.tarija.tresdos.tarijasegura.other.PolicyManager;
@@ -231,6 +232,12 @@ public class MainActivity extends AppCompatActivity {
         switch (menuItem.getItemId()){
             case R.id.db:
                 FragmentClass = DashboardFragment.class;
+                break;
+            case R.id.addNew:
+                FragmentClass = NewChildFragment.class;
+                break;
+            case R.id.childs:
+                FragmentClass = ChildListFragment.class;
                 break;
             default:
                 FragmentClass = DashboardFragment.class;
