@@ -42,15 +42,15 @@ public class OptionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
 
         allItems = new ArrayList<OptionClass>();
-        OptionClass a = new OptionClass(R.drawable.location, "Ubicar a mi hijo", "Ubica a su hijo y observe su ubicacion");
+        OptionClass a = new OptionClass(R.drawable.location, "Ubicar a mi hijo", "Ubica a su hijo y observe su ubicacion", "ubicar");
         allItems.add(a);
-        a = new OptionClass(R.drawable.history, "Historial de navegacion", "Observe el historial de navegacion de su hijo");
+        a = new OptionClass(R.drawable.history, "Historial de navegacion", "Observe el historial de navegacion de su hijo", "historia");
         allItems.add(a);
-        a = new OptionClass(R.drawable.contact, "Contactos de mi hijo", "Observe los contactos de su hijo");
+        a = new OptionClass(R.drawable.contact, "Contactos de mi hijo", "Observe los contactos de su hijo", "contacto");
         allItems.add(a);
-        a = new OptionClass(R.drawable.alert, "Enviar alerta", "Envie un mensaje alerta su hijo");
+        a = new OptionClass(R.drawable.alert, "Enviar alerta", "Envie un mensaje alerta su hijo", "alerta");
         allItems.add(a);
-        a = new OptionClass(R.drawable.ic_android_black_24dp, "Bloqueo de aplicaciones", "Bloquee apliaciones y limite su tiempo de uso");
+        a = new OptionClass(R.drawable.ic_android_black_24dp, "Bloqueo de aplicaciones", "Bloquee apliaciones y limite su tiempo de uso", "bloquear");
         allItems.add(a);
 
 
