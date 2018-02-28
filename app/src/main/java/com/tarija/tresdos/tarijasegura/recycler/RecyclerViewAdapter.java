@@ -2,13 +2,17 @@ package com.tarija.tresdos.tarijasegura.recycler;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.tarija.tresdos.tarijasegura.MainActivity;
 import com.tarija.tresdos.tarijasegura.R;
+import com.tarija.tresdos.tarijasegura.fragments.OptionsFragment;
 import com.tarija.tresdos.tarijasegura.interfaces.ItemClickListerner;
 import com.tarija.tresdos.tarijasegura.other.ChildClass;
 
@@ -46,7 +50,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.setItemClickListerner(new ItemClickListerner() {
             @Override
             public void onClik(View view, int position, boolean isLongClick) {
-                Toast.makeText(view.getContext(), "Key = " + itemList.get(position).getKey(), Toast.LENGTH_SHORT).show();
+                FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.addToBackStack(null);
+                ft.replace(R.id.content, new OptionsFragment());
+                ft.commit();
             }
         });
     }
