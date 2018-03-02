@@ -27,10 +27,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     private List<ChildClass> itemList;
     private Context context;
 
-//    private SharedPreferences sharedPreferences;
-//    public static final String mypreference = "mypref";
-//    public static final String Child = "child_id";
-//    private SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+    public static final String mypreference = "mypref";
+    public static final String Child = "child_id";
+    private SharedPreferences.Editor editor;
 
     public RecyclerViewAdapter(Context context, List<ChildClass> itemList){
         this.itemList = itemList;
@@ -50,6 +50,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.setItemClickListerner(new ItemClickListerner() {
             @Override
             public void onClik(View view, int position, boolean isLongClick) {
+                sharedPreferences = ((MainActivity) context).getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putString(Child, itemList.get(position).getKey());
+                editor.commit();
                 FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.addToBackStack(null);
