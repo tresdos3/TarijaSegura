@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="8dp"
+    android:layout_marginBottom="16dp"
+    card_view:cardBackgroundColor="@color/colorWhite"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/child_photo"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="Settings"
+            android:scaleType="centerCrop"
+            android:src="@drawable/items" />
+
+        <TextView
+            android:id="@+id/tvInformId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="Historial"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txtUrlName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInformId"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Connections"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/create_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/txtUrlName"
+            android:gravity="center"
+            android:text="Creado el 123123"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+        <Button
+            android:id="@+id/btnGo"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ir a sitio" />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:id="@+id/btnDelete" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

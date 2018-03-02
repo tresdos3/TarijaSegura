@@ -10,9 +10,16 @@ public class browser {
     private Integer Visitas;
     private long Creado;
     private String Fecha_Hora;
+    private String key;
 
     public browser(){
 
+    }
+    public browser(String key, String titulo, String url, long creado){
+        this.key = key;
+        this.Titulo = titulo;
+        this.Url = url;
+        this.Creado = creado;
     }
     public browser(String titulo, String url, int visitas, long creado, String fecha_Hora){
         this.Titulo = titulo;
@@ -60,5 +67,13 @@ public class browser {
 
     public void setFecha_Hora(String fecha_Hora) {
         Fecha_Hora = fecha_Hora;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

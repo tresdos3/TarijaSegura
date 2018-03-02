@@ -2,6 +2,7 @@ package com.tarija.tresdos.tarijasegura.fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -41,7 +42,11 @@ public class ChildListFragment extends Fragment {
     private RelativeLayout child_content1;
 
     private FirebaseUser user;
-    private DatabaseReference rootRef, childRef;
+    private DatabaseReference rootRef;
+
+    private SharedPreferences sharedPreferences;
+    public static final String mypreference = "mypref";
+    public static final String Child = "child_id";
 
     public ChildListFragment() {
         // Required empty public constructor
