@@ -41,6 +41,11 @@ public class RecyclerViewAdapterBrowser extends RecyclerView.Adapter<RecyclerVie
     private FirebaseUser user;
     private DatabaseReference rootRef, HijosRef;
 
+    private SharedPreferences sharedPreferences;
+    public static final String mypreference = "mypref";
+    public static final String Child = "child_id";
+    private String Key;
+
 
     public RecyclerViewAdapterBrowser(Context context, List<browser> itemList){
         this.itemList = itemList;
@@ -70,10 +75,13 @@ public class RecyclerViewAdapterBrowser extends RecyclerView.Adapter<RecyclerVie
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sharedPreferences = context.getSharedPreferences(mypreference,
+                        Context.MODE_PRIVATE);
+                Key = sharedPreferences.getString(Child, "");
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 rootRef = FirebaseDatabase.getInstance().getReference();
                 HijosRef = rootRef.child("j9NozBQs7OU3qwUBgaIxCEsde1Y2");
-                HijosRef.child(itemList.get(position).getKey()).removeValue()
+                HijosRef.child("hijos").child("-KrcqFkmfF2_NA3uWjA4").child("historial").child(itemList.get(position).getKey()).removeValue()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -94,24 +102,4 @@ public class RecyclerViewAdapterBrowser extends RecyclerView.Adapter<RecyclerVie
     public int getItemCount() {
         return this.itemList.size();
     }
-
-//    @Override
-//    public void onBindViewHolder(RecyclerViewHolders holder, int position) {
-//        holder.TextViewNameMatter.setText(itemList.get(position).getNombre());
-//        holder.setItemClickListerner(new ItemClickListerner() {
-//            @Override
-//            public void onClik(View view, int position, boolean isLongClick) {
-//                FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
-//                FragmentTransaction ft = fm.beginTransaction();
-//                ft.addToBackStack(null);
-//                ft.replace(R.id.content, new OptionsFragment());
-//                ft.commit();
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return this.itemList.size();
-//    }
 }

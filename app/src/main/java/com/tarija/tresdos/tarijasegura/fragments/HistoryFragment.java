@@ -71,7 +71,7 @@ public class HistoryFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        HijosRef = rootRef.child("j9NozBQs7OU3qwUBgaIxCEsde1Y2");
+        HijosRef = rootRef.child(user.getUid());
         Key = sharedPreferences.getString(Child, "");
         viewLoading();
         getAllHistory();
@@ -85,7 +85,7 @@ public class HistoryFragment extends Fragment {
 
     private void getAllHistory() {
         final List<browser> allItems = new ArrayList<browser>();
-        HijosRef.child("hijos").child("-KrcqFkmfF2_NA3uWjA4").child("historial").addValueEventListener(new ValueEventListener() {
+        HijosRef.child("hijos").child(Key).child("historial").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 allItems.clear();
