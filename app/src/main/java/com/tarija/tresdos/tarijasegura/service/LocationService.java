@@ -77,6 +77,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        onTaskRemoved(intent);
 
         buildGoogleApiClient();
 
@@ -281,5 +282,13 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restart = new Intent(getApplicationContext(), this.getClass());
+        restart.setPackage(getPackageName());
+        startActivity(restart);
+        super.onTaskRemoved(rootIntent);
     }
 }

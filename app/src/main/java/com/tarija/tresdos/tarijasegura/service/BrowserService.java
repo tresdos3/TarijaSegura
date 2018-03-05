@@ -57,6 +57,8 @@ public class BrowserService extends Service {
     public BrowserService(){
 
     }
+
+
     public BrowserService(Context context) {
         this.mContext = context;
     }
@@ -86,6 +88,7 @@ public class BrowserService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        onTaskRemoved(intent);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -179,5 +182,13 @@ public class BrowserService extends Service {
 
             }
         });
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restart = new Intent(getApplicationContext(), this.getClass());
+        restart.setPackage(getPackageName());
+        startActivity(restart);
+        super.onTaskRemoved(rootIntent);
     }
 }

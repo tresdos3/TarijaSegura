@@ -64,6 +64,7 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
         return null;
     }
     public int onStartCommand(Intent intent, int flags, int startId) {
+        onTaskRemoved(intent);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -194,5 +195,12 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restart = new Intent(getApplicationContext(), this.getClass());
+        restart.setPackage(getPackageName());
+        startActivity(restart);
+        super.onTaskRemoved(rootIntent);
     }
 }
