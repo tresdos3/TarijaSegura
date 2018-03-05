@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
 
     private PolicyManager policyManager;
+    private static final int REQUEST_CALL = 1;
     String device_unique_id,IMEI;
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
     public  static final int RequestPermissionCode  = 1 ;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String Tipo = "tipoKey";
     public static final String Session = "SessionKey";
     public static final String Huid = "HuidKey";
+    public static final String star = "star";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_main);
                     chagueVariables();
                     RegisterToken();
+                    if (!sharedPreferences.contains(message))
+                        alertPermission();
+                    else {
+                        String texto = sharedPreferences.getString(message,"");
+                        if (!texto.equals("true")){
+                            alertPermission();
+                        }
+                    }
                     break;
                 case "h":
                     setContentView(R.layout.activity_main_child);
@@ -176,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
         switch (type){
             case "p":
                 menuInflater.inflate(R.menu.actionmenuf, menu);
+                MenuItem item = menu.findItem(R.id.search);
+                item.setVisible(false);
                 break;
             default:
                 Log.d("User", "Error en switch");
@@ -270,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             messages(MDToast.TYPE_SUCCESS, "Ha terminado su sesion");
+                            cerrarServicio();
                             goLogInScreen();
                         } else {
                             messages(MDToast.TYPE_ERROR, "Error al cerrar sesion");

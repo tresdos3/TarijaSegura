@@ -16,6 +16,11 @@ public class contact {
         this.nombre = nombre;
         this.numero = numero;
     }
+    public contact(String key, String nombre, String numero){
+        this.key = key;
+        this.nombre = nombre;
+        this.numero = numero;
+    }
 
     public String getNombre() {
         return nombre;
