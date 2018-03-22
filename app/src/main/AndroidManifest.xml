@@ -16,17 +16,16 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:name="android.hardware.location"
         android:required="true" />
-    <uses-feature
-        android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:name=".other.myaplication"
@@ -40,6 +39,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,12 +52,12 @@
         <activity
             android:name=".ProfileConfActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Intro_Activity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Intro_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SelectChildActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -85,13 +85,15 @@
         </receiver>
         <receiver
             android:name=".receiver.BootReceiver"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".service.MyFirebaseService"
             android:enabled="true"
@@ -103,23 +105,28 @@
         <service
             android:name=".service.LocationService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
         <service
             android:name=".service.EmergencyService"
             android:enabled="true"
-            android:exported="true"/>
-        <service
-            android:name=".service.ContactsService"
-            android:enabled="true"
-            android:exported="true"/>
-        <service
-            android:name=".service.BrowserService"
-            android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
         <service
             android:name=".service.DetectAppService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".service.ContactsService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.BrowserService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

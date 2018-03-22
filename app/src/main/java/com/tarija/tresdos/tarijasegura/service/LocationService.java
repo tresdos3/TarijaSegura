@@ -68,16 +68,16 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         Log.d(TAG, "onCreate Distance: " + distance);
         String texto = sharedpreferences.getString(Huid,"");
 //        maps nuevo = new maps(location.getLatitude(),location.getLongitude());
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue("0");
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue("0");
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue("0");
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue(0);
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue(0);
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue(0);
 
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        onTaskRemoved(intent);
+
 
         buildGoogleApiClient();
 
@@ -86,7 +86,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         if (mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
-
+        onTaskRemoved(intent);
         return START_STICKY;
 
     }
@@ -123,6 +123,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
      */
     protected void startLocationUpdates() {
 
+
         try {
 
             LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -133,11 +134,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
         }
     }
-
     private void updateUI() {
-
         if (null != mCurrentLocation) {
-
             StringBuilder sbLocationData = new StringBuilder();
             sbLocationData
                     .append("Latitud")
@@ -213,7 +211,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public void onConnected(Bundle connectionHint) throws SecurityException {
         Log.i(TAG, "Connected to GoogleApiClient");
 
-
         if (mCurrentLocation == null) {
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
@@ -288,7 +285,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public void onTaskRemoved(Intent rootIntent) {
         Intent restart = new Intent(getApplicationContext(), this.getClass());
         restart.setPackage(getPackageName());
-        startActivity(restart);
+        startService(restart);
         super.onTaskRemoved(rootIntent);
     }
 }

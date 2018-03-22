@@ -9,7 +9,7 @@ import com.tarija.tresdos.tarijasegura.remote.retrofitClient;
  */
 
 public class common {
-    public  static String fcmtoken = "d7qvVeKLs4k:APA91bHvnETCXj-6qvMxo3ArGsQqhW3Faa4W687QOJBpBjYma7H8xaabTj-KaHzDRRpNqm6ZqzVz5ZeGsb7i32LfQ3ID3X3ski-eowG_jKMCOXlHNSEXtu56TukL2CdENT-NJ2dQVPon";
+    public  static String fcmtoken = "AAAA_FeQ6Mw:APA91bHUSs_WURI8iIm9uQhUV4Mw3Nrx-RDTidWcuDBEst8bFSlIfwD4ZSSj11y58K00B0ByWJs4OPMG1bp13NUIcR3r96AokGC-iznlFPROQ4d2cAiSe8GpFPcxkg0QIJfl5dGzPdub";
     private static String baseurl = "https://fcm.googleapis.com/";
     public  static ApiService getFCMClient(){
         return retrofitClient.getClient(baseurl).create(ApiService.class);

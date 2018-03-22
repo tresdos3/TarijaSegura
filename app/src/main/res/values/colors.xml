@@ -11,4 +11,7 @@
     <color name="album_title">#4c4c4c</color>
     <color name="startblue">#09c6df</color>
     <color name="endtblue">#0bcce6</color>
+    <color name="green_100">#C8E6C9</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_100">#F5F5F5</color>
 </resources>

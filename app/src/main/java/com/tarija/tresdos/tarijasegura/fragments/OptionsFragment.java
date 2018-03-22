@@ -48,7 +48,7 @@ public class OptionsFragment extends Fragment {
         allItems.add(a);
         a = new OptionClass(R.drawable.contact, "Contactos de mi hijo", "Observe los contactos de su hijo", "contacto");
         allItems.add(a);
-        a = new OptionClass(R.drawable.alert, "Enviar alerta", "Envie un mensaje alerta su hijo", "alerta");
+        a = new OptionClass(R.drawable.alert, "Enviar Mensaje", "Envie un mensaje su hijo", "alerta");
         allItems.add(a);
         a = new OptionClass(R.drawable.ic_android_black_24dp, "Bloqueo de aplicaciones", "Bloquee apliaciones y limite su tiempo de uso", "bloquear");
         allItems.add(a);

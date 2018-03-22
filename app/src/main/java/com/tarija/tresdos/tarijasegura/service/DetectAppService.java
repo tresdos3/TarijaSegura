@@ -160,7 +160,7 @@ public class DetectAppService extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         Intent restart = new Intent(getApplicationContext(), this.getClass());
         restart.setPackage(getPackageName());
-        startActivity(restart);
+        startService(restart);
         super.onTaskRemoved(rootIntent);
     }
 }
