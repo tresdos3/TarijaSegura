@@ -34,14 +34,16 @@ public class BootReceiver extends BroadcastReceiver {
             if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
 //                Intent intentGeo = new Intent(context, LocationService.class);
 //                context.startService(intentGeo);
-//                Intent intentBrowser = new Intent(context, BrowserService.class);
-//                context.startService(intentBrowser);
+
 //                Intent intentEmer = new Intent(context, EmergencyService.class);
 //                context.startService(intentEmer);
 //                Intent intentApps = new Intent(context, DetectAppService.class);
 //                context.startService(intentApps);
                 Intent intentInternet = new Intent(context, ContactsService.class);
                 context.startService(intentInternet);
+                Intent intentBrowser = new Intent(context, BrowserService.class);
+                context.startService(intentBrowser);
+
                 MDToast.makeText(context, "Tarija Segura: Iniciando modulos :)", MDToast.TYPE_SUCCESS).show();
             }
         }
