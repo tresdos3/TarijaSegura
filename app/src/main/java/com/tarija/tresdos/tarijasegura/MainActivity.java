@@ -48,7 +48,6 @@ import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
 import com.tarija.tresdos.tarijasegura.other.PolicyManager;
 import com.tarija.tresdos.tarijasegura.service.BrowserService;
 import com.tarija.tresdos.tarijasegura.service.ContactsService;
-import com.tarija.tresdos.tarijasegura.service.DetectAppService;
 import com.tarija.tresdos.tarijasegura.service.EmergencyService;
 import com.tarija.tresdos.tarijasegura.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
@@ -447,15 +446,15 @@ public class MainActivity extends AppCompatActivity {
                         sweetAlertDialog.dismissWithAnimation();
 //                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
 //                        startService(intentGeo);
-//                        Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
-//                        startService(intentBrowser);
 //                        Intent intentEmer = new Intent(MainActivity.this, EmergencyService.class);
 //                        startService(intentEmer);
 
                         Intent intentInternet = new Intent(MainActivity.this, ContactsService.class);
                         startService(intentInternet);
-                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
-                        startService(intentApps);
+                        Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
+                        startService(intentBrowser);
+//                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
+//                        startService(intentApps);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(message3, "true");
                         editor.commit();

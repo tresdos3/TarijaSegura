@@ -24,7 +24,7 @@ import java.util.TimerTask;
 public class ContactsService extends Service {
 
     private FirebaseUser user;
-    private DatabaseReference rootRef, profileRef, childRef;
+    private DatabaseReference rootRef, childRef;
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "mypref";
@@ -65,12 +65,7 @@ public class ContactsService extends Service {
                     cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null, null, null);
                     while (cursor.moveToNext()) {
                         contact data = new contact(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
-                        childRef.child("hijos").child(texto).child("contactos").push().setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("Numeros: ", "It's Work!");
-                            }
-                        });
+                        childRef.child("hijos").child(texto).child("contactos").push().setValue(data);
                     }
 
                     cursor.close();
