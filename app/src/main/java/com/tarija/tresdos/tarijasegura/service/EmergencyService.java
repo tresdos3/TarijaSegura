@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -138,6 +139,7 @@ public class EmergencyService extends Service implements SensorEventListener {
         final NotificationManager mgr = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder note = new NotificationCompat.Builder(this);
+        note.setSound(Uri.parse("android.resource://"+ getPackageName() + "/" + R.raw.son));
         note.setContentTitle("Tarija Segura");
         note.setContentText(Text);
         note.setContentInfo("Enviando alerta...");

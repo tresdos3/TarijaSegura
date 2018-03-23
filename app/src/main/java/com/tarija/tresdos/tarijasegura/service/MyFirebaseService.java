@@ -3,6 +3,7 @@ package com.tarija.tresdos.tarijasegura.service;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -21,6 +22,7 @@ public class MyFirebaseService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSound(Uri.parse("android.resource://"+ getPackageName() + "/" + R.raw.father))
                 .setSmallIcon(R.drawable.sos)
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getBody())
