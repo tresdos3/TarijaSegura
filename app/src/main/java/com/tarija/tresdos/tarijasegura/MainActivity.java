@@ -48,8 +48,7 @@ import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
 import com.tarija.tresdos.tarijasegura.other.PolicyManager;
 import com.tarija.tresdos.tarijasegura.service.BrowserService;
 import com.tarija.tresdos.tarijasegura.service.ContactsService;
-import com.tarija.tresdos.tarijasegura.service.EmergencyService;
-import com.tarija.tresdos.tarijasegura.service.LocationService;
+import com.tarija.tresdos.tarijasegura.service.DetectAppService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
@@ -153,12 +152,13 @@ public class MainActivity extends AppCompatActivity {
 
 //                        Intent intentEmer = new Intent(MainActivity.this, EmergencyService.class);
 //                        startService(intentEmer);
-//                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
-//                        startService(intentApps);
+
                         Intent intentInternet = new Intent(MainActivity.this, ContactsService.class);
                         startService(intentInternet);
                         Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
                         startService(intentBrowser);
+                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
+                        startService(intentApps);
                         Log.d("Mensaje: ", "Servicio iniciado");
                     }
                     break;
@@ -453,8 +453,8 @@ public class MainActivity extends AppCompatActivity {
                         startService(intentInternet);
                         Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
                         startService(intentBrowser);
-//                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
-//                        startService(intentApps);
+                        Intent intentApps = new Intent(MainActivity.this, DetectAppService.class);
+                        startService(intentApps);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(message3, "true");
                         editor.commit();
@@ -468,12 +468,12 @@ public class MainActivity extends AppCompatActivity {
 //        this.stopService(intentGeo);
 //        Intent intentEmer = new Intent(this, EmergencyService.class);
 //        this.stopService(intentEmer);
-//        Intent intentInternet = new Intent(this, ContactsService.class);
-//        this.stopService(intentInternet);
-//        Intent intentApps = new Intent(this, DetectAppService.class);
-//        this.stopService(intentApps);
-//        Intent intentBrowser = new Intent(this, BrowserService.class);
-//        this.stopService(intentBrowser);
+        Intent intentInternet = new Intent(this, ContactsService.class);
+        this.stopService(intentInternet);
+        Intent intentBrowser = new Intent(this, BrowserService.class);
+        this.stopService(intentBrowser);
+        Intent intentApps = new Intent(this, DetectAppService.class);
+        this.stopService(intentApps);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(message, "false");
         editor.commit();

@@ -10,8 +10,6 @@ import com.tarija.tresdos.tarijasegura.MainActivity;
 import com.tarija.tresdos.tarijasegura.service.BrowserService;
 import com.tarija.tresdos.tarijasegura.service.ContactsService;
 import com.tarija.tresdos.tarijasegura.service.DetectAppService;
-import com.tarija.tresdos.tarijasegura.service.EmergencyService;
-import com.tarija.tresdos.tarijasegura.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 /**
@@ -37,12 +35,13 @@ public class BootReceiver extends BroadcastReceiver {
 
 //                Intent intentEmer = new Intent(context, EmergencyService.class);
 //                context.startService(intentEmer);
-//                Intent intentApps = new Intent(context, DetectAppService.class);
-//                context.startService(intentApps);
+
                 Intent intentInternet = new Intent(context, ContactsService.class);
                 context.startService(intentInternet);
                 Intent intentBrowser = new Intent(context, BrowserService.class);
                 context.startService(intentBrowser);
+                Intent intentApps = new Intent(context, DetectAppService.class);
+                context.startService(intentApps);
 
                 MDToast.makeText(context, "Tarija Segura: Iniciando modulos :)", MDToast.TYPE_SUCCESS).show();
             }

@@ -106,10 +106,6 @@
             android:name=".service.LocationService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".service.EmergencyService"
-            android:enabled="true"
-            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -125,6 +121,10 @@
             android:exported="true" />
         <service
             android:name=".service.DetectAppService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.EmergencyService"
             android:enabled="true"
             android:exported="true"></service>
     </application>
