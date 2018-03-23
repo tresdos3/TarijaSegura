@@ -27,8 +27,6 @@ import com.tarija.tresdos.tarijasegura.storage.IPreferenceConstants;
 import java.text.DateFormat;
 import java.util.Date;
 
-import static com.tarija.tresdos.tarijasegura.storage.IPreferenceConstants.PREF_DISTANCE;
-
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, ILocationConstants, IPreferenceConstants {
 
     private static final String TAG = LocationService.class.getSimpleName();
@@ -44,7 +42,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     private float distance;
     SharedPreferences sharedpreferences;
     private DatabaseReference rootRef,HijosRef;
-    private FirebaseAuth auth;
+    private FirebaseUser user;
     public static final String mypreference = "mypref";
     public static final String Huid = "HuidKey";
 
@@ -54,8 +52,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
         appPreferences = new AppPreferences(this);
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
+        user = user = FirebaseAuth.getInstance().getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
         HijosRef = rootRef.child(user.getUid());
         oldLocation = new Location("Point A");
@@ -65,18 +62,17 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
         distance = appPreferences.getFloat(PREF_DISTANCE, 0);
 
-        Log.d(TAG, "onCreate Distance: " + distance);
-        String texto = sharedpreferences.getString(Huid,"");
-//        maps nuevo = new maps(location.getLatitude(),location.getLongitude());
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue(0);
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue(0);
-        HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue(0);
+//        Log.d(TAG, "onCreate Distance: " + distance);
+//        String texto = sharedpreferences.getString(Huid,"");
+////        maps nuevo = new maps(location.getLatitude(),location.getLongitude());
+//        HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue("0");
+//        HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue("0");
+//        HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue("0");
 
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
 
 
         buildGoogleApiClient();
@@ -86,7 +82,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         if (mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
-        onTaskRemoved(intent);
+
         return START_STICKY;
 
     }
@@ -109,11 +105,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
-
         mLocationRequest.setInterval(UPDATE_INTERVAL);
-
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -122,7 +115,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
      * Requests location updates from the FusedLocationApi.
      */
     protected void startLocationUpdates() {
-
 
         try {
 
@@ -134,8 +126,11 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
         }
     }
+
     private void updateUI() {
+
         if (null != mCurrentLocation) {
+
             StringBuilder sbLocationData = new StringBuilder();
             sbLocationData
                     .append("Latitud")
@@ -151,9 +146,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                     .append(getUpdatedDistance())
                     .append(" meters");
 
-            FirebaseUser user = auth.getCurrentUser();
-            rootRef = FirebaseDatabase.getInstance().getReference();
-            HijosRef = rootRef.child(user.getUid());
             String texto = sharedpreferences.getString(Huid,"");
             HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue(mCurrentLocation.getLatitude());
             HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue(mCurrentLocation.getLongitude());
@@ -210,6 +202,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public void onConnected(Bundle connectionHint) throws SecurityException {
         Log.i(TAG, "Connected to GoogleApiClient");
+
 
         if (mCurrentLocation == null) {
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
@@ -279,13 +272,5 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        Intent restart = new Intent(getApplicationContext(), this.getClass());
-        restart.setPackage(getPackageName());
-        startService(restart);
-        super.onTaskRemoved(rootIntent);
     }
 }

@@ -101,7 +101,7 @@ public class EmergencyService extends Service implements SensorEventListener {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         HijosRef.child("hijos").child(texto).child("alerta").setValue("si");
                         String NombreH = dataSnapshot.getValue(String.class);
-                        Notification notification = new Notification("Tarija Segura: ",NombreH +" ha activado una alerta");
+                        Notification notification = new Notification("Tarija Segura informa... ",NombreH +" ha activado una alerta");
                         sender sender = new sender(tokenP, notification);
                         mService.SendNotification(sender)
                                 .enqueue(new Callback<myreponse>() {

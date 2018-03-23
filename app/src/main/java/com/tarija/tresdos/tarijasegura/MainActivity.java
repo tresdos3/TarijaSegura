@@ -50,6 +50,7 @@ import com.tarija.tresdos.tarijasegura.service.BrowserService;
 import com.tarija.tresdos.tarijasegura.service.ContactsService;
 import com.tarija.tresdos.tarijasegura.service.DetectAppService;
 import com.tarija.tresdos.tarijasegura.service.EmergencyService;
+import com.tarija.tresdos.tarijasegura.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
@@ -148,9 +149,6 @@ public class MainActivity extends AppCompatActivity {
                     String texto = sharedPreferences.getString(message2,"");
                     Log.d("Mensaje: ", texto);
                     if (texto.equals("true")){
-////                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
-////                        startService(intentGeo);
-
                         Intent intentInternet = new Intent(MainActivity.this, ContactsService.class);
                         startService(intentInternet);
                         Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
@@ -159,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
                         startService(intentApps);
                         Intent intentEmer = new Intent(MainActivity.this, EmergencyService.class);
                         startService(intentEmer);
+                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
+                        startService(intentGeo);
                         Log.d("Mensaje: ", "Servicio iniciado");
                     }
                     break;
@@ -444,9 +444,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismissWithAnimation();
-//                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
-//                        startService(intentGeo);
-
                         Intent intentInternet = new Intent(MainActivity.this, ContactsService.class);
                         startService(intentInternet);
                         Intent intentBrowser = new Intent(MainActivity.this, BrowserService.class);
@@ -455,6 +452,8 @@ public class MainActivity extends AppCompatActivity {
                         startService(intentApps);
                         Intent intentEmer = new Intent(MainActivity.this, EmergencyService.class);
                         startService(intentEmer);
+                        Intent intentGeo = new Intent(MainActivity.this, LocationService.class);
+                        startService(intentGeo);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(message3, "true");
                         editor.commit();
@@ -466,14 +465,14 @@ public class MainActivity extends AppCompatActivity {
     private void cerrarServicio(){
 //        Intent intentGeo = new Intent(this, LocationService.class);
 //        this.stopService(intentGeo);
-        Intent intentEmer = new Intent(this, EmergencyService.class);
-        this.stopService(intentEmer);
         Intent intentInternet = new Intent(this, ContactsService.class);
         this.stopService(intentInternet);
         Intent intentBrowser = new Intent(this, BrowserService.class);
         this.stopService(intentBrowser);
         Intent intentApps = new Intent(this, DetectAppService.class);
         this.stopService(intentApps);
+        Intent intentEmer = new Intent(this, EmergencyService.class);
+        this.stopService(intentEmer);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(message, "false");
         editor.commit();
