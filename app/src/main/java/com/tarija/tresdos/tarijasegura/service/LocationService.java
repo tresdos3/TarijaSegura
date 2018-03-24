@@ -273,4 +273,12 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+//    @Override
+//    public void onTaskRemoved(Intent rootIntent) {
+//        Intent restart = new Intent(getApplicationContext(), this.getClass());
+//        restart.setPackage(getPackageName());
+//        startService(restart);
+//        super.onTaskRemoved(rootIntent);
+//    }
 }

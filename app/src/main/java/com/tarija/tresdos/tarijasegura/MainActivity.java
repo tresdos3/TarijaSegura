@@ -1,8 +1,6 @@
 package com.tarija.tresdos.tarijasegura;
 
-import android.*;
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;

@@ -4,13 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentManager;
-
-import com.tarija.tresdos.tarijasegura.MainActivity;
 import com.tarija.tresdos.tarijasegura.service.BrowserService;
 import com.tarija.tresdos.tarijasegura.service.ContactsService;
 import com.tarija.tresdos.tarijasegura.service.DetectAppService;
 import com.tarija.tresdos.tarijasegura.service.EmergencyService;
+import com.tarija.tresdos.tarijasegura.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 /**
@@ -31,9 +29,6 @@ public class BootReceiver extends BroadcastReceiver {
         String type = sharedPreferences.getString(Tipo, "");
         if (!type.equals("p")){
             if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-//                Intent intentGeo = new Intent(context, LocationService.class);
-//                context.startService(intentGeo);
-
                 Intent intentInternet = new Intent(context, ContactsService.class);
                 context.startService(intentInternet);
                 Intent intentBrowser = new Intent(context, BrowserService.class);
@@ -42,6 +37,8 @@ public class BootReceiver extends BroadcastReceiver {
                 context.startService(intentApps);
                 Intent intentEmer = new Intent(context, EmergencyService.class);
                 context.startService(intentEmer);
+                Intent intentGeo = new Intent(context, LocationService.class);
+                context.startService(intentGeo);
 
                 MDToast.makeText(context, "Tarija Segura: Iniciando modulos :)", MDToast.TYPE_SUCCESS).show();
             }
