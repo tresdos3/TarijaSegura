@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout l1;
     private ConstraintLayout c1;
 
-    private Button sendMail;
+    private Button sendMessage, logout;
 
     private TextView father_ci, father_mail, father_phone, father_name, father_family, child_name;
 
@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String message = "btnKey";
     public static final String message2 = "btnAdmin";
     public static final String message3 = "btnServices";
+    public static final String message4 = "btnSecurity";
+
     private PermissionManager permissionManager;
     private final int REQUEST_LOCATION = 200;
     private LocationManager lm;
@@ -133,13 +135,30 @@ public class MainActivity extends AppCompatActivity {
 
                     l1 = (LinearLayout) findViewById(R.id.ll);
                     c1 = (ConstraintLayout) findViewById(R.id.cl);
-                    sendMail = (Button) findViewById(R.id.sendMail);
                     father_name = (TextView) findViewById(R.id.father_name);
                     father_ci = (TextView) findViewById(R.id.father_ci);
                     father_mail = (TextView) findViewById(R.id.father_mail);
                     father_phone = (TextView) findViewById(R.id.father_phone);
                     father_family = (TextView) findViewById(R.id.father_family);
                     child_name = (TextView) findViewById(R.id.child_name);
+                    sendMessage = (Button) findViewById(R.id.sendMessage);
+                    logout =  (Button) findViewById(R.id.logout);
+
+                    sendMessage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    });
+                    logout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MainActivity.this, PinLogoutActivity.class);
+                            startActivity(intent);
+                        }
+                    });
 
                     ChargeProfile();
                     RegisterTokenChild();
@@ -352,22 +371,10 @@ public class MainActivity extends AppCompatActivity {
 
                                     if (!sharedPreferences.contains(message))
                                         alertPermission();
-                                    else {
-                                        String texto = sharedPreferences.getString(message,"");
-                                        if (!texto.equals("true")){
-                                            alertPermission();
-                                        }
-                                    }
                                     if (!sharedPreferences.contains(message3))
-                                        if(iniciarServicio())
                                             AdminDevice();
-                                    else {
-                                        String texto = sharedPreferences.getString(message2,"");
-                                        if (!texto.equals("true")){
-                                            if(iniciarServicio())
-                                                AdminDevice();
-                                        }
-                                    }
+//                                    if (!sharedPreferences.contains(message4))
+
 
                                 }
 
@@ -461,8 +468,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     private void cerrarServicio(){
-//        Intent intentGeo = new Intent(this, LocationService.class);
-//        this.stopService(intentGeo);
+        Intent intentGeo = new Intent(this, LocationService.class);
+        this.stopService(intentGeo);
         Intent intentInternet = new Intent(this, ContactsService.class);
         this.stopService(intentInternet);
         Intent intentBrowser = new Intent(this, BrowserService.class);

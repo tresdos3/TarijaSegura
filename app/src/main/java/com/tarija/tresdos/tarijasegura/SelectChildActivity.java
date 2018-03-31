@@ -76,7 +76,7 @@ public class SelectChildActivity extends AppCompatActivity {
                 editor.putString(Session, "si");
                 editor.putString(Huid, listaUID.get(v));
                 editor.commit();
-                Intent i = new Intent(SelectChildActivity.this, MainActivity.class);
+                Intent i = new Intent(SelectChildActivity.this, PinActivity.class);
                 finish();
                 startActivity(i);
             }

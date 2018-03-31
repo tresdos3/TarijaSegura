@@ -14,9 +14,9 @@ public class chatmessage {
     public chatmessage() {
     }
 
-    public chatmessage(String messageText) {
+    public chatmessage(String from, String messageText) {
         this.messageText = messageText;
-        this.messageUser = "Tu tutor: ";
+        this.messageUser =  from;
         this.messageTime = new Date().getTime();
     }
 

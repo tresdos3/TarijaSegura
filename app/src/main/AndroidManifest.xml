@@ -127,6 +127,10 @@
             android:name=".service.LocationService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".PinActivity" />
+        <activity android:name=".PinLogoutActivity"></activity>
     </application>
 
 </manifest>

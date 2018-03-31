@@ -15,6 +15,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tarija.tresdos.tarijasegura.model.Notification;
+import com.tarija.tresdos.tarijasegura.model.myreponse;
+import com.tarija.tresdos.tarijasegura.model.sender;
+import com.tarija.tresdos.tarijasegura.other.common;
+import com.tarija.tresdos.tarijasegura.remote.ApiService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by tresdos on 11-07-17.
@@ -23,42 +32,68 @@ import com.google.firebase.database.ValueEventListener;
 public class PhoneCallReceiver extends BroadcastReceiver {
 
     private DatabaseReference rootRef,HijosRef;
-    private FirebaseAuth auth;
-    public String tokenP;
-    public String Nombre;
+    private FirebaseUser user;
     public String phoneNumber;
-    public static final String UrlNoti = "http://138.197.27.208/NotificacionBrowser";
     SharedPreferences sharedpreferences;
-    //    varibles sharedpreferences
     public static final String mypreference = "mypref";
-    public static  final String NombreHIJO = "Nombrehijo";
+    public static final String Huid = "HuidKey";
+    ApiService mService;
+    public String tokenP;
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
         try {
             if (intent.getAction().equals("android.intent.action.PHONE_STATE"))
             {
+                sharedpreferences = context.getSharedPreferences(mypreference,
+                        Context.MODE_PRIVATE);
+                mService = common.getFCMClient();
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                rootRef = FirebaseDatabase.getInstance().getReference();
+                HijosRef = rootRef.child(user.getUid());
                 String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
                 if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
                 {
                     TelephonyManager tmgr = (TelephonyManager) context
                             .getSystemService(Context.TELEPHONY_SERVICE);
-
-                    auth = FirebaseAuth.getInstance();
-                    FirebaseUser user = auth.getCurrentUser();
-                    rootRef = FirebaseDatabase.getInstance().getReference();
-                    HijosRef = rootRef.child(user.getUid());
                     Bundle bundle = intent.getExtras();
                     phoneNumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-                    rootRef.child(user.getUid()).child("tokenP").addValueEventListener(new ValueEventListener() {
+                    final String texto = sharedpreferences.getString(Huid,"");
+                    HijosRef.child("tokenP").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (sharedpreferences.contains(NombreHIJO)) {
-                                Nombre =sharedpreferences.getString(NombreHIJO, "");
-                            }
                             tokenP = dataSnapshot.getValue(String.class);
-                            Log.d("Llamada en proceso: ", "Numero: "+phoneNumber);
-                            Log.d("Llamada en proceso: ", "Nombre: "+Nombre);
-                            Log.d("Llamada en proceso: ", "Token: "+tokenP);
+                            HijosRef.child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    String NombreH = dataSnapshot.getValue(String.class);
+                                    Notification notification = new Notification("Tarija Segura informa... ",NombreH +" llamada del num: "+phoneNumber);
+                                    sender sender = new sender(tokenP, notification);
+                                    mService.SendNotification(sender)
+                                            .enqueue(new Callback<myreponse>() {
+                                                @Override
+                                                public void onResponse(Call<myreponse> call, Response<myreponse> response) {
+                                                    if (response.body().success == 1){
+                                                        Log.d("AAA", "Notificacion enviada");
+                                                    }
+                                                    else{
+                                                        Log.d("AAA", "Notificacion no enviada");
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<myreponse> call, Throwable t) {
+
+                                                }
+                                            });
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         }
 
                         @Override
@@ -66,12 +101,6 @@ public class PhoneCallReceiver extends BroadcastReceiver {
 
                         }
                     });
-
-
-
-//                    String aaaa = bundle.getString(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE);
-
-
 
                 }
             }
