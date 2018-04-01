@@ -100,8 +100,6 @@ public class PinLogoutActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
-                    MDToast mdToast = MDToast.makeText(getApplicationContext(), "Pin Incorrecto", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR);
-                    mdToast.show();
                     HijosRef.child("hijos").child(texto2).child("nombre").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,6 +127,8 @@ public class PinLogoutActivity extends AppCompatActivity {
 
                         }
                     });
+                    MDToast mdToast = MDToast.makeText(getApplicationContext(), "Pin Incorrecto", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR);
+                    mdToast.show();
                 }
             }
 
