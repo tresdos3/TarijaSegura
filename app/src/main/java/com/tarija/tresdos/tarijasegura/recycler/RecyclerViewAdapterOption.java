@@ -73,9 +73,9 @@ public class RecyclerViewAdapterOption extends RecyclerView.Adapter<RecyclerView
                         ft.replace(R.id.content, new AlertFragment());
                         ft.commit();
                         break;
-                    case "bloquear":
-                        MDToast.makeText(view.getContext(), "Aun trabajamos en esta opcion :)", MDToast.TYPE_INFO).show();
-                        break;
+//                    case "bloquear":
+//                        MDToast.makeText(view.getContext(), "Aun trabajamos en esta opcion :)", MDToast.TYPE_INFO).show();
+//                        break;
                 }
             }
         });

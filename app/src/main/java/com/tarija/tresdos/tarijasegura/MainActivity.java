@@ -42,6 +42,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.tarijasegura.fragments.ChildListFragment;
 import com.tarija.tresdos.tarijasegura.fragments.DashboardFragment;
+import com.tarija.tresdos.tarijasegura.fragments.EmergencyFragment;
 import com.tarija.tresdos.tarijasegura.fragments.NewChildFragment;
 import com.tarija.tresdos.tarijasegura.other.PolicyManager;
 import com.tarija.tresdos.tarijasegura.service.BrowserService;
@@ -282,6 +283,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.childs:
                 FragmentClass = ChildListFragment.class;
+                break;
+            case R.id.emergency:
+                FragmentClass = EmergencyFragment.class;
                 break;
             default:
                 FragmentClass = DashboardFragment.class;

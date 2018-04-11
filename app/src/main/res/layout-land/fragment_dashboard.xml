@@ -13,12 +13,10 @@
             android:layout_width="202dp"
             android:layout_height="195dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/fff"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,16 +24,19 @@
             android:id="@+id/textView2"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="88dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
             android:text="Con TARIJA SEGURA los padres podrán conocer de una forma cómoda y sencilla, protegiendo de ese modo a sus hijos de las posibles amenazas que estos puedan sufrir."
             android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="40px"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.153"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

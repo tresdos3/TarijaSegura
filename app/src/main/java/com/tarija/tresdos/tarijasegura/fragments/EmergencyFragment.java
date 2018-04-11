@@ -4,19 +4,17 @@ package com.tarija.tresdos.tarijasegura.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.tarija.tresdos.tarijasegura.R;
-import com.tarija.tresdos.tarijasegura.other.ChildClass;
+import com.tarija.tresdos.tarijasegura.other.EmergencyClass;
 import com.tarija.tresdos.tarijasegura.other.OptionClass;
-import com.tarija.tresdos.tarijasegura.recycler.RecyclerViewAdapterOption;
+import com.tarija.tresdos.tarijasegura.recycler.RecyclerViewAdapterEmergency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +22,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OptionsFragment extends Fragment {
+public class EmergencyFragment extends Fragment {
 
     private ChildListFragment.OnFragmentInteractionListener mListener;
     private LinearLayoutManager lLayout;
     private RecyclerView rView;
-    private List<OptionClass> allItems;
+    private List<EmergencyClass> allItems;
 
-    public OptionsFragment() {
+    public EmergencyFragment() {
         // Required empty public constructor
     }
 
@@ -39,29 +37,34 @@ public class OptionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_options, container, false);
-
-        allItems = new ArrayList<OptionClass>();
-        OptionClass a = new OptionClass(R.drawable.location, "Ubicar a mi hijo", "Ubica a su hijo y observe su ubicacion", "ubicar");
+        View view = inflater.inflate(R.layout.fragment_emergency, container, false);
+        allItems = new ArrayList<EmergencyClass>();
+        EmergencyClass a = new EmergencyClass(R.drawable.history, "Policia", "110");
         allItems.add(a);
-        a = new OptionClass(R.drawable.history, "Historial de navegacion", "Observe el historial de navegacion de su hijo", "historia");
+        a = new EmergencyClass(R.drawable.history, "Bomberos", "119");
         allItems.add(a);
-        a = new OptionClass(R.drawable.contact, "Contactos de mi hijo", "Observe los contactos de su hijo", "contacto");
+        a = new EmergencyClass(R.drawable.history, "Grupo Sar", "138");
         allItems.add(a);
-        a = new OptionClass(R.drawable.alert, "Enviar Mensaje", "Envie un mensaje su hijo", "alerta");
+        a = new EmergencyClass(R.drawable.history, "Emergencias", "118");
         allItems.add(a);
-//        a = new OptionClass(R.drawable.ic_android_black_24dp, "Bloqueo de aplicaciones", "Bloquee apliaciones y limite su tiempo de uso", "bloquear");
-//        allItems.add(a);
-
-
+        a = new EmergencyClass(R.drawable.history,"Hospital San Juan de Dios","6645555");
+        allItems.add(a);
+        a = new EmergencyClass(R.drawable.history,"Hospital C.N.S.","6633610");
+        allItems.add(a);
+        a = new EmergencyClass(R.drawable.history,"Seguridad Ciudadana","6631001");
+        allItems.add(a);
+        a = new EmergencyClass(R.drawable.history,"Orden y Seguridad","6642222");
+        allItems.add(a);
 
         lLayout = new LinearLayoutManager(getContext());
-        rView = (RecyclerView) view.findViewById(R.id.recycler_view2);
-        RecyclerViewAdapterOption rcAdapter = new RecyclerViewAdapterOption(getContext(), allItems);
+        rView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        RecyclerViewAdapterEmergency rcAdapter = new RecyclerViewAdapterEmergency(getContext(), allItems);
         rView.setAdapter(rcAdapter);
         rView.setLayoutManager(lLayout);
+        // Inflate the layout for this fragment
         return view;
     }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

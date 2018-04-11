@@ -62,7 +62,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/orange_1"
             android:id="@+id/btnRegistro"
             android:layout_width="239dp"
             android:layout_height="wrap_content"

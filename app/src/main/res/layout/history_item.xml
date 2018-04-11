@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             android:contentDescription="Settings"
             android:scaleType="centerCrop"
-            android:src="@drawable/items" />
+            android:src="@drawable/background" />
 
         <TextView
             android:id="@+id/tvInformId"
