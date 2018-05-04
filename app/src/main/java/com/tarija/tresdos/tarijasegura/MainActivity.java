@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     if (!sharedPreferences.contains(message))
                                         alertPermission();
-                                    if (!sharedPreferences.contains(message3))
+                                    if (!sharedPreferences.contains(message2))
                                             AdminDevice();
 //                                    if (!sharedPreferences.contains(message4))
 
@@ -384,14 +384,12 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                    messages(MDToast.TYPE_ERROR,"Algo salio mal :(");
                                 }
                             });
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            messages(MDToast.TYPE_ERROR,"Algo salio mal :(");
                         }
                     });
                 }

@@ -84,17 +84,19 @@ public class PinLogoutActivity extends AppCompatActivity {
                 String texto = sharedpreferences.getString(Password,"");
                 String texto2 = sharedpreferences.getString(Huid,"");
                 if (pin.equals(texto)) {
+                    HijoEstado = rootRef.child(user.getUid()).child("hijos").child(texto2).child("estado");
+                    HijoEstado.setValue("no");
                     MDToast mdToast = MDToast.makeText(getApplicationContext(), "Pin Aceptado...", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS);
                     mdToast.show();
+                    cerrarServicio();
                     signOut();
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.clear();
                     editor.commit();
 
-                    HijoEstado = rootRef.child(user.getUid()).child("hijos").child(texto2).child("estado");
-                    HijoEstado.setValue("no");
+
                     policyManager.disableAdmin();
-                    finish();
+//                    finish();
                     Intent intent = new Intent(Intent.ACTION_DELETE);
                     intent.setData(Uri.parse("package:com.tarija.tresdos.tarijasegura"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

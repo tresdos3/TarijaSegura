@@ -65,6 +65,7 @@ public class NewChildFragment extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            btnRegistrar.setEnabled(false);
                             HijosRef.child("hijos/"+id +"/ubicacion/latitud").setValue(0);
                             HijosRef.child("hijos/"+id +"/ubicacion/longitud").setValue(0);
                             new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
@@ -74,11 +75,12 @@ public class NewChildFragment extends Fragment {
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            btnRegistrar.setEnabled(true);
                                             sweetAlertDialog.dismissWithAnimation();
                                             getFragmentManager()
                                                     .beginTransaction()
                                                     .addToBackStack(null)
-                                                    .replace(R.id.content, new DashboardFragment())
+                                                    .replace(R.id.content, new ChildListFragment())
                                                     .commit();
                                         }
                                     })

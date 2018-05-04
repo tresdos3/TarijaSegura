@@ -19,7 +19,7 @@
             android:layout_height="140dp"
             android:contentDescription="Settings"
             android:layout_centerInParent="true"
-            android:src="@drawable/background"
+            android:src="@drawable/items"
             android:scaleType="centerCrop" />
         <ImageView
             android:layout_width="80px"

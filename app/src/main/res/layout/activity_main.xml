@@ -15,7 +15,7 @@
         app:headerLayout="@layout/header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/items"
         app:itemTextColor="@color/colorWhite"
         app:itemIconTint="@color/colorWhite"
         app:menu="@menu/drawermenu"

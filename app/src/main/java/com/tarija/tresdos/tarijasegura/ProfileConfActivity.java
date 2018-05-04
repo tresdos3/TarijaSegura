@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -140,18 +141,37 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                pDialog.dismissWithAnimation();
-                                new SweetAlertDialog(ProfileConfActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText("Felicidades ya puede :)!")
-                                        .setContentText("Continuar...!")
-                                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                user.updateEmail(email.getText().toString())
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
-                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                sweetAlertDialog.dismissWithAnimation();
-                                                goMainActivity();
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                pDialog.dismissWithAnimation();
+                                                new SweetAlertDialog(ProfileConfActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                                        .setTitleText("Felicidades ya puede :)!")
+                                                        .setContentText("Continuar...!")
+                                                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                                            @Override
+                                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                                sweetAlertDialog.dismissWithAnimation();
+                                                                goMainActivity();
+                                                            }
+                                                        })
+                                                        .show();
                                             }
-                                        })
-                                        .show();
+                                        });
+//
+//                                pDialog.dismissWithAnimation();
+//                                new SweetAlertDialog(ProfileConfActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+//                                        .setTitleText("Felicidades ya puede :)!")
+//                                        .setContentText("Continuar...!")
+//                                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+//                                            @Override
+//                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                                sweetAlertDialog.dismissWithAnimation();
+//                                                goMainActivity();
+//                                            }
+//                                        })
+//                                        .show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
