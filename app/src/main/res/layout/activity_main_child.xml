@@ -262,7 +262,7 @@
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:background="@drawable/items">
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spinner"
             style="@style/SpinKitView.Circle"

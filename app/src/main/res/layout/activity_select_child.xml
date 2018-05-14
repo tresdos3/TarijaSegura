@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/items"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.tarija.tresdos.tarijasegura.SelectChildActivity"
     tools:showIn="@layout/activity_select_child">

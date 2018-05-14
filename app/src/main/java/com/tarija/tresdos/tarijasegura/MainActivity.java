@@ -326,6 +326,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void signOuts() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            messages(MDToast.TYPE_SUCCESS, "Tu padre termino la sesion");
+                            cerrarServicio();
+                            goLogInScreen();
+                        } else {
+                            messages(MDToast.TYPE_ERROR, "Error al cerrar sesion");
+                        }
+                    }
+                });
+    }
     public void messages(int type, String message){
         MDToast.makeText(this, message, MDToast.LENGTH_LONG, type).show();
     }
@@ -369,17 +386,21 @@ public class MainActivity extends AppCompatActivity {
                             childRef.child(uid).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists())
+                                        Log.d("existe: ", "si");
+                                    else
+                                        signOuts();
                                     Map<String, String> map = (Map)dataSnapshot.getValue();
                                     child_name.setText(map.get("nombre"));
                                     ViewProfile();
-
+                                    String estado = map.get("estado").toString();
+                                    if (estado.contains("no"))
+                                        signOuts();
                                     if (!sharedPreferences.contains(message))
                                         alertPermission();
                                     if (!sharedPreferences.contains(message2))
                                             AdminDevice();
 //                                    if (!sharedPreferences.contains(message4))
-
-
                                 }
 
                                 @Override

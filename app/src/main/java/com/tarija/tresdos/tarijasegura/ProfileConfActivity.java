@@ -2,10 +2,12 @@ package com.tarija.tresdos.tarijasegura;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -141,6 +143,18 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name.getText().toString() +" "+lastname.getText().toString())
+                                        .build();
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d("data", "User profile updated.");
+                                                }
+                                            }
+                                        });
                                 user.updateEmail(email.getText().toString())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -159,19 +173,6 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                                                         .show();
                                             }
                                         });
-//
-//                                pDialog.dismissWithAnimation();
-//                                new SweetAlertDialog(ProfileConfActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-//                                        .setTitleText("Felicidades ya puede :)!")
-//                                        .setContentText("Continuar...!")
-//                                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-//                                            @Override
-//                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-//                                                sweetAlertDialog.dismissWithAnimation();
-//                                                goMainActivity();
-//                                            }
-//                                        })
-//                                        .show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
