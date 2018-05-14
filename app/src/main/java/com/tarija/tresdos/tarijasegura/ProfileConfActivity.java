@@ -151,7 +151,7 @@ public class ProfileConfActivity extends AppCompatActivity implements View.OnCli
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d("data", "User profile updated.");
+                                                    Log.d("data", "Actualizado");
                                                 }
                                             }
                                         });
